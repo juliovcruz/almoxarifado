@@ -7,6 +7,11 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 
+// link: http://www.phpmyadmin.co/
+// server: sql10.freemysqlhosting.net
+/// user: sql10320407
+// pass: XAUJQWRLez
+
 public class ConnectionFactory {
 	
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
