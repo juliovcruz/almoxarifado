@@ -52,7 +52,7 @@ public class MyUtil {
 		scroll.setBackground(Color.white);
 	}
 	
-	public static void addRow(FuncionarioTableModel model) {
+	public static void addRowFuncs(FuncionarioTableModel model) {
 		
 		ArrayList<Funcionario> funcs = new ArrayList<>();
 		

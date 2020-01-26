@@ -29,9 +29,8 @@ import view.components.btnMenuLeft;
 
 public class Home extends JFrame {
 
-	private JPanel backPrincipal;
+	private JPanel backMain;
 	private JTable JTableFuncs;
-	//private MyJTableScrollPane TableFuncs;
 	private JScrollPane TableFuncs;
 
 	public static void main(String[] args) {
@@ -60,29 +59,22 @@ public class Home extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(new Color(251,255,241));
 		setBounds(100, 100, 1000, 600);
-		backPrincipal = new JPanel();
-		backPrincipal.setBackground(MyUtil.BG);
-		backPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(backPrincipal);
-		backPrincipal.setLayout(null);
+		backMain = new JPanel();
+		backMain.setBackground(MyUtil.BG);
+		backMain.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(backMain);
+		backMain.setLayout(null);
 		
 		JPanel JHeader = new JPanel();
 		JHeader.setBackground(new Color(0,0,52));
 		JHeader.setBounds(230, 0, 770, 125);
-		backPrincipal.add(JHeader);
+		backMain.add(JHeader);
 		JHeader.setLayout(null);
 		
 		final JLabel lblExit = new JLabel("X");	
 		lblExit.setBounds(750, 0, 17, 14);
 		lblExit.setForeground(Color.RED);
 		lblExit.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		JHeader.add(lblExit);
-		
-		JLabel lblHeader = new JLabel("Menu");
-		lblHeader.setBounds(48, 27, 550, 60);
-		lblHeader.setForeground(Color.white);
-		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
-		JHeader.add(lblHeader);
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -97,22 +89,26 @@ public class Home extends JFrame {
 				lblExit.setForeground(Color.RED);
 			}
 		});
+		JHeader.add(lblExit);
+		
+		JLabel lblHeader = new JLabel("Menu");
+		lblHeader.setBounds(48, 27, 550, 60);
+		lblHeader.setForeground(Color.white);
+		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
+		JHeader.add(lblHeader);
 		
 		JPanel backMenuLateral = new JPanel();
 		backMenuLateral.setBackground(new Color(0,0,52));
 		backMenuLateral.setBounds(0, 0, 230, 600);
-		backPrincipal.add(backMenuLateral);
+		backMain.add(backMenuLateral);
 		backMenuLateral.setLayout(null);
 		
 		final JPanel panelFuncs = new JPanel();
 		panelFuncs.setBackground(Color.BLACK);
-		panelFuncs.setBounds(230, 126, 770, 475);
+		panelFuncs.setBounds(230, 125, 770, 475);
 		panelFuncs.setLayout(null);
 		panelFuncs.setVisible(false);
-		backPrincipal.add(panelFuncs);
-		
-		
-		ArrayList<Funcionario> funcs = new ArrayList<>();
+		backMain.add(panelFuncs);
 		
 		FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
 		JTableFuncs = new JTable(modelFuncs);
@@ -120,7 +116,7 @@ public class Home extends JFrame {
 		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		panelFuncs.add(TableFuncs);
 		
-		MyUtil.addRow(modelFuncs);
+		MyUtil.addRowFuncs(modelFuncs);
 		
 		
 		// Adicionando Menus Laterais
