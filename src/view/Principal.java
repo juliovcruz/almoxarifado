@@ -18,7 +18,7 @@ public class Principal {
 		return funcs;
 	}
 	
-	public static void main (String[] args) {
+	/*public static void main (String[] args) {
 		ArrayList<Funcionario> funcs = new ArrayList<>();
 		
 		//Funcionario f = new Funcionario(2003,"Victor");
@@ -32,4 +32,5 @@ public class Principal {
 		}
 		
 	}
+	*/
 }
