@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import view.models.FuncionarioTableModel;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ import java.awt.FlowLayout;
 import javax.swing.JTable;
 import models.Funcionario;
 import modelsBd.FuncionarioBD;
+import view.components.btnMenuLeft;
 
 public class Home extends JFrame {
 
@@ -46,18 +48,6 @@ public class Home extends JFrame {
 		});
 	}
 	
-	public static ArrayList<Funcionario> readFuncs() {
-		ArrayList<Funcionario> funcs = new ArrayList<>();
-		
-		FuncionarioBD fbd = new FuncionarioBD();
-		
-		for(Funcionario f: fbd.read()) {
-			funcs.add(f);	
-		}
-		
-		return funcs;
-	}
-	
 	public void setColorBtnNoHover(JPanel jp) {
 		jp.setBackground(new Color(0,0,52));
 	}
@@ -71,21 +61,28 @@ public class Home extends JFrame {
 		setBackground(new Color(251,255,241));
 		setBounds(100, 100, 1000, 600);
 		backPrincipal = new JPanel();
-		backPrincipal.setBackground(new Color(251,255,241));
+		backPrincipal.setBackground(MyUtil.BG);
 		backPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(backPrincipal);
 		backPrincipal.setLayout(null);
 		
 		JPanel JHeader = new JPanel();
+		JHeader.setBackground(new Color(0,0,52));
 		JHeader.setBounds(230, 0, 770, 125);
 		backPrincipal.add(JHeader);
 		JHeader.setLayout(null);
 		
 		final JLabel lblExit = new JLabel("X");	
+		lblExit.setBounds(750, 0, 17, 14);
 		lblExit.setForeground(Color.RED);
 		lblExit.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		lblExit.setBounds(750, 0, 17, 14);
 		JHeader.add(lblExit);
+		
+		JLabel lblHeader = new JLabel("Menu");
+		lblHeader.setBounds(48, 27, 550, 60);
+		lblHeader.setForeground(Color.white);
+		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
+		JHeader.add(lblHeader);
 		lblExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -116,22 +113,19 @@ public class Home extends JFrame {
 		
 		
 		ArrayList<Funcionario> funcs = new ArrayList<>();
-		funcs = readFuncs();
 		
 		FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
 		JTableFuncs = new JTable(modelFuncs);
 		TableFuncs = new JScrollPane(JTableFuncs);
-		MyUtilities.TableFuncionario(JTableFuncs,TableFuncs);
+		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		panelFuncs.add(TableFuncs);
 		
-		for(int i =0;i<funcs.size();i++) {
-			modelFuncs.addRow(funcs.get(i));
-		}
+		MyUtil.addRow(modelFuncs);
 		
 		
 		// Adicionando Menus Laterais
 		final ArrayList<btnMenuLeft> btnsMenuLeft = new ArrayList<>();
-		for(int j=100,i=0;j<=220;j+=40,i++) {
+		for(int j=125,i=0;j<=245;j+=40,i++) {
 			String strs[] = {"Principal","Usuarios","Histórico de Trocas", "Configurações"};
 			btnsMenuLeft.add(new btnMenuLeft(j,strs[i]));
 			backMenuLateral.add(btnsMenuLeft.get(i));
@@ -144,6 +138,7 @@ public class Home extends JFrame {
 					int indexj = index;
 					for(int j =0;j<btnsMenuLeft.size();j++ ) {
 						
+						lblHeader.setText(btnsMenuLeft.get(indexj).getTxt());
 						if(indexj == 1) {
 							panelFuncs.setVisible(true);
 						}else {

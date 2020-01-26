@@ -1,4 +1,4 @@
-package view;
+package view.models;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

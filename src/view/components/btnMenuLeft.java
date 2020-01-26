@@ -1,4 +1,4 @@
-package view;
+package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,6 +15,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class btnMenuLeft extends JPanel {
+	
+	private String txt;
+	
+	public String getTxt() {
+		return txt;
+	}
 	
 	private int id; // 0 NORMAL 1 = CLICKADO
 	
@@ -36,6 +42,7 @@ public class btnMenuLeft extends JPanel {
 	}
 	
 	public btnMenuLeft(int altura,String texto) {
+			this.txt = texto;
 			addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

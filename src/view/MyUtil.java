@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -10,10 +11,13 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
-public class MyUtilities {
+import models.Funcionario;
+import modelsBd.FuncionarioBD;
+import view.models.FuncionarioTableModel;
+import models.Funcionario;
+public class MyUtil {
 	
-	private JTable table;
-	private FuncionarioTableModel fixo;
+	public static Color BG = new Color(238,240,242);
 	
 	public static void setCenter(JTable table, int alignment){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
@@ -46,6 +50,25 @@ public class MyUtilities {
 		scroll.setBorder(null);
 		scroll.setBounds(20,50,730,380);
 		scroll.setBackground(Color.white);
+	}
+	
+	public static void addRow(FuncionarioTableModel model) {
+		
+		ArrayList<Funcionario> funcs = new ArrayList<>();
+		
+		FuncionarioBD fbd = new FuncionarioBD();
+		
+		for(Funcionario f: fbd.read()) {
+			funcs.add(f);	
+		}
+		
+		for(int i =0;i<funcs.size();i++) {
+			model.addRow(funcs.get(i));
+		}
+	}
+	
+	public static Color BG() {
+		return new Color(238,240,242);
 	}
 
 }
