@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
-
 // link: http://www.phpmyadmin.co/
 // server: sql10.freemysqlhosting.net
 /// user: sql10320407
