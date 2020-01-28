@@ -47,5 +47,12 @@ public class FuncionarioTableModel extends AbstractTableModel{
         this.dados.remove(linha);
         this.fireTableRowsDeleted(linha, linha);
     }
+    
+    public void resetRow() {
+    	while(getRowCount() > 0)
+    	{
+    	    removeRow(0);
+    	}
+    }
 
 }

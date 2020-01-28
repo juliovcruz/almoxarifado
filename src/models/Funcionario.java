@@ -3,7 +3,7 @@ package models;
 public class Funcionario {
 
 	private int id;
-	private int matricula;
+	private String matricula;
 	private String nome;
 	
 	public String toString() {
@@ -18,7 +18,7 @@ public class Funcionario {
 		this.id = id;
 	}
 	
-	public Funcionario(int matricula, String nome){
+	public Funcionario(String matricula, String nome){
 		this.matricula = matricula;
 		this.nome = nome;
 	}
@@ -26,11 +26,11 @@ public class Funcionario {
 	public Funcionario() {
 	}
 
-	public int getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 	
-	public void setMatricula(int matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 	

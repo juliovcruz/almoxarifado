@@ -20,7 +20,7 @@ public class FuncionarioBD {
 		
 		try {
 			stmt = con.prepareStatement("INSERT INTO funcionario (matricula,nome)VALUES(?,?)");
-			stmt.setInt(1, f.getMatricula());
+			stmt.setString(1, f.getMatricula());
 			stmt.setString(2, f.getNome());
 			
 			stmt.executeUpdate();
@@ -48,7 +48,36 @@ public class FuncionarioBD {
 			while(rs.next()) {
 	            Funcionario f= new Funcionario();
 	            f.setID(rs.getInt("id"));
-	            f.setMatricula(rs.getInt("matricula"));
+	            f.setMatricula(rs.getString("matricula"));
+	            f.setNome(rs.getString("nome"));
+	            funcs.add(f);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+	     
+	     return funcs;
+	     
+	}
+	
+	public ArrayList<Funcionario> readFilter(String filter){
+		java.sql.Connection con = ConnectionFactory.getConnection();
+		java.sql.PreparedStatement stmt = null;
+	     ResultSet rs = null;
+	     ArrayList<Funcionario> funcs = new ArrayList<Funcionario>();
+	     
+	     try {
+			stmt = con.prepareStatement("SELECT * FROM funcionario WHERE nome LIKE ?");
+			stmt.setString(1, "%"+filter+"%");
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+	            Funcionario f= new Funcionario();
+	            f.setID(rs.getInt("id"));
+	            f.setMatricula(rs.getString("matricula"));
 	            f.setNome(rs.getString("nome"));
 	            funcs.add(f);
 			}

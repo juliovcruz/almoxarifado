@@ -2,6 +2,7 @@ package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -48,6 +49,7 @@ public class btnMenuLeft extends JPanel {
 			public void mouseEntered(MouseEvent e) {
 				if(id == 0)
 				setColorBtnHover();
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {

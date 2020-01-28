@@ -37,38 +37,32 @@ public class MyUtil {
 		table.setShowVerticalLines(false);
 		table.setShowHorizontalLines(false);
 		table.setShowGrid(false);
-		table.setBackground(Color.white);
-		table.setGridColor(Color.white);
+		table.setBackground(BG);
+		table.setGridColor(BG);
 		table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-		table.getTableHeader().setBackground(Color.white);
+		table.getTableHeader().setBackground(BG);
 		table.getTableHeader().setBorder(null);
 		
-		scroll.getViewport().setBackground(Color.white);
+		scroll.getViewport().setBackground(BG);
 		scroll.setViewportBorder(null);
-		scroll.setForeground(Color.white);
+		scroll.setForeground(BG);
 		scroll.setBorder(null);
 		scroll.setBounds(20,50,730,380);
-		scroll.setBackground(Color.white);
+		scroll.setBackground(BG);
 	}
 	
-	public static void addRowFuncs(FuncionarioTableModel model) {
-		
-		ArrayList<Funcionario> funcs = new ArrayList<>();
-		
-		FuncionarioBD fbd = new FuncionarioBD();
-		
-		for(Funcionario f: fbd.read()) {
-			funcs.add(f);	
-		}
-		
-		for(int i =0;i<funcs.size();i++) {
-			model.addRow(funcs.get(i));
-		}
-	}
 	
 	public static Color BG() {
 		return new Color(238,240,242);
+	}
+	
+	public static void addFunc(String matricula, String nome) {
+		FuncionarioBD fbd = new FuncionarioBD();
+		
+		Funcionario f = new Funcionario(matricula,nome);
+		fbd.create(f);
+		
 	}
 
 }

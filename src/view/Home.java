@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import view.models.FuncionarioTableModel;
 import java.awt.EventQueue;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
@@ -26,12 +29,21 @@ import javax.swing.JTable;
 import models.Funcionario;
 import modelsBd.FuncionarioBD;
 import view.components.btnMenuLeft;
+import view.components.panelFuncionarios;
+
+import javax.swing.JTextField;
+import java.awt.Panel;
+import java.awt.Label;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Home extends JFrame {
 
 	private JPanel backMain;
-	private JTable JTableFuncs;
-	private JScrollPane TableFuncs;
+	private JTextField txtNome;
+	private JTextField txtMatricula;
+	panelFuncionarios panelFuncs;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -83,10 +95,12 @@ public class Home extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblExit.setForeground(new Color(150,0,0));
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblExit.setForeground(Color.RED);
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
 		JHeader.add(lblExit);
@@ -97,26 +111,75 @@ public class Home extends JFrame {
 		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
 		JHeader.add(lblHeader);
 		
+		txtNome = new JTextField();
+		txtNome.setText("Nome");
+		txtNome.setBounds(631, 27, 86, 20);
+		JHeader.add(txtNome);
+		txtNome.setColumns(10);
+		
+		txtMatricula = new JTextField();
+		txtMatricula.setText("Matricula");
+		txtMatricula.setBounds(631, 51, 86, 20);
+		JHeader.add(txtMatricula);
+		txtMatricula.setColumns(10);
+		
+		JButton btnAddfunc = new JButton("AddFunc");
+		btnAddfunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MyUtil.addFunc(txtMatricula.getText(), txtNome.getText());
+				panelFuncs.readFuncs();
+			}
+		});
+		btnAddfunc.setBounds(628, 75, 89, 23);
+		JHeader.add(btnAddfunc);
+		
 		JPanel backMenuLateral = new JPanel();
 		backMenuLateral.setBackground(new Color(0,0,52));
 		backMenuLateral.setBounds(0, 0, 230, 600);
 		backMain.add(backMenuLateral);
 		backMenuLateral.setLayout(null);
 		
-		final JPanel panelFuncs = new JPanel();
-		panelFuncs.setBackground(Color.BLACK);
+		/*JPanel panelFuncs = new JPanel();
+		panelFuncs.setBackground(Color.GRAY);
 		panelFuncs.setBounds(230, 125, 770, 475);
 		panelFuncs.setLayout(null);
 		panelFuncs.setVisible(false);
+		*/
+		panelFuncs = new panelFuncionarios();
 		backMain.add(panelFuncs);
 		
-		FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
+		/*FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
 		JTableFuncs = new JTable(modelFuncs);
 		TableFuncs = new JScrollPane(JTableFuncs);
 		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		panelFuncs.add(TableFuncs);
 		
+		txtFiltro = new JTextField();
+		txtFiltro.setText("Filtro");
+		txtFiltro.setBounds(20, 11, 160, 20);
+		panelFuncs.add(txtFiltro);
+		txtFiltro.setColumns(10);
+		
+		ImageIcon imgSearch = new ImageIcon("src/imgs/search-3-16.png");
+		JLabel IconSearch = new JLabel(imgSearch);
+		IconSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		IconSearch.setBounds(190, 12, 16, 16);
+		panelFuncs.add(IconSearch);
+		
 		MyUtil.addRowFuncs(modelFuncs);
+		*/
 		
 		
 		// Adicionando Menus Laterais
