@@ -47,7 +47,7 @@ public class FuncionarioBD {
 			
 			while(rs.next()) {
 	            Funcionario f= new Funcionario();
-	            f.setID(rs.getInt("id"));
+	            f.setId(rs.getInt("id"));
 	            f.setMatricula(rs.getString("matricula"));
 	            f.setNome(rs.getString("nome"));
 	            funcs.add(f);
@@ -70,13 +70,14 @@ public class FuncionarioBD {
 	     ArrayList<Funcionario> funcs = new ArrayList<Funcionario>();
 	     
 	     try {
-			stmt = con.prepareStatement("SELECT * FROM funcionario WHERE nome LIKE ?");
+			stmt = con.prepareStatement("SELECT * FROM funcionario WHERE nome LIKE ? OR matricula LIKE ?");
 			stmt.setString(1, "%"+filter+"%");
+			stmt.setString(2, "%"+filter+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
 	            Funcionario f= new Funcionario();
-	            f.setID(rs.getInt("id"));
+	            f.setId(rs.getInt("id"));
 	            f.setMatricula(rs.getString("matricula"));
 	            f.setNome(rs.getString("nome"));
 	            funcs.add(f);

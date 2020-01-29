@@ -105,7 +105,7 @@ public class Home extends JFrame {
 		});
 		JHeader.add(lblExit);
 		
-		JLabel lblHeader = new JLabel("Menu");
+		JLabel lblHeader = new JLabel("Vai estudar Java");
 		lblHeader.setBounds(48, 27, 550, 60);
 		lblHeader.setForeground(Color.white);
 		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
@@ -138,48 +138,9 @@ public class Home extends JFrame {
 		backMenuLateral.setBounds(0, 0, 230, 600);
 		backMain.add(backMenuLateral);
 		backMenuLateral.setLayout(null);
-		
-		/*JPanel panelFuncs = new JPanel();
-		panelFuncs.setBackground(Color.GRAY);
-		panelFuncs.setBounds(230, 125, 770, 475);
-		panelFuncs.setLayout(null);
-		panelFuncs.setVisible(false);
-		*/
+
 		panelFuncs = new panelFuncionarios();
 		backMain.add(panelFuncs);
-		
-		/*FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
-		JTableFuncs = new JTable(modelFuncs);
-		TableFuncs = new JScrollPane(JTableFuncs);
-		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
-		panelFuncs.add(TableFuncs);
-		
-		txtFiltro = new JTextField();
-		txtFiltro.setText("Filtro");
-		txtFiltro.setBounds(20, 11, 160, 20);
-		panelFuncs.add(txtFiltro);
-		txtFiltro.setColumns(10);
-		
-		ImageIcon imgSearch = new ImageIcon("src/imgs/search-3-16.png");
-		JLabel IconSearch = new JLabel(imgSearch);
-		IconSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		IconSearch.setBounds(190, 12, 16, 16);
-		panelFuncs.add(IconSearch);
-		
-		MyUtil.addRowFuncs(modelFuncs);
-		*/
 		
 		
 		// Adicionando Menus Laterais
