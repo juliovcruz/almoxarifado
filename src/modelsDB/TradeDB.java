@@ -1,5 +1,7 @@
 package modelsDB;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,13 +43,14 @@ public class TradeDB {
 		}
 	}
 	
-public void update(Trade trade) {
+	public void update(Trade trade) {
 		
 		java.sql.Connection con = ConnectionFactory.getConnection();
 		java.sql.PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("UPDATE trades SET id_user = ?,id_item = ?,descr = ?,day = ?,month = ?,year = ?,user_name = ?,item_name = ?,user_reg = ?,amount = ? WHERE ID = ?");
+			
+			stmt = con.prepareStatement("UPDATE trades SET id_user = ?,id_item = ?,descr = ?,day = ?,month = ?,year = ?,user_name = ?,item_name = ?,user_reg = ?,amount = ? WHERE id = ?");
 			stmt.setInt(1, trade.getUser().getId());
 			stmt.setInt(2, trade.getItem().getId());
 			stmt.setString(3, trade.getDescr());
@@ -59,6 +62,7 @@ public void update(Trade trade) {
 			stmt.setString(9, trade.getUser().getReg());
 			stmt.setString(10, trade.getAmount());
 			stmt.setInt(11, trade.getId());
+			
 			stmt.executeUpdate();
 			
 			JOptionPane.showMessageDialog(null, "Editado com sucesso!");
@@ -161,5 +165,23 @@ public void update(Trade trade) {
 		      }
 		      return aux;
 	}
+	
+	public void remove(Trade t){
+		  Connection con = ConnectionFactory.getConnection();
+		  PreparedStatement stmt = null;
+		      
+		      try {
+		          stmt = con.prepareStatement("DELETE FROM trades WHERE id = ?");
+		          stmt.setInt(1, t.getId());
+		          stmt.executeUpdate();
+		          JOptionPane.showMessageDialog(null,"removido com sucesso");
+		      } catch (SQLException ex) {
+		          JOptionPane.showMessageDialog(null,"Erro ao remover "+ex);
+		      }finally{
+		       ConnectionFactory.closeConnection(con, stmt);
+		      
+		      }
+	}
+		
 
 }

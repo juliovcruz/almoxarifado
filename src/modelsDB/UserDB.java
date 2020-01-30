@@ -1,4 +1,6 @@
 package modelsDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -6,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
+import models.Item;
 import models.User;
 
 public class UserDB {
@@ -22,6 +25,28 @@ public class UserDB {
 			stmt.executeUpdate();
 			
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Erro: "+e);
+		}finally {
+			ConnectionFactory.closeConnection(con,stmt);
+		}
+		 
+	}
+	
+	public void update(User f) {
+		
+		java.sql.Connection con = ConnectionFactory.getConnection();
+		java.sql.PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE users SET reg = ?,name = ? WHERE id = ?");
+			stmt.setString(1, f.getReg());
+			stmt.setString(2, f.getName());
+			stmt.setInt(3,f.getId());
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Editado com sucesso!");
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,"Erro: "+e);
@@ -104,6 +129,24 @@ public class UserDB {
 		       ConnectionFactory.closeConnection(con, stmt);
 		      }
 		      return aux;
+	}
+	
+	public void remove(User u){
+		  Connection con = ConnectionFactory.getConnection();
+		  PreparedStatement stmt = null;
+		      
+		      try {
+		          stmt = con.prepareStatement("DELETE FROM users WHERE id = ?");
+		          stmt.setInt(1, u.getId());
+		          stmt.executeUpdate();
+		          JOptionPane.showMessageDialog(null,"removido com sucesso");
+		      } catch (SQLException ex) {
+		          JOptionPane.showMessageDialog(null,"Erro ao remover "+ex);
+		      }finally{
+		       ConnectionFactory.closeConnection(con, stmt);
+		      
+		      }
+		      
 	}
 	
 }

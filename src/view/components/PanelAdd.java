@@ -60,6 +60,8 @@ public class PanelAdd extends JPanel{
 	private DefaultListModel<User> Userlist;
 	private JLabel IconCorrect;
 	
+	public int IDEDIT;
+	
 	
 	public void readLists() {
 		MyUtil.LoadListItem(Itemlist);	
@@ -279,9 +281,9 @@ public class PanelAdd extends JPanel{
 						if(descr == null) descr = "Sem descricao";
 						
 						try {
-						MyUtil.editTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount);
+						MyUtil.editTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount,IDEDIT);
 						}	catch (Exception ex) {
-				            throw new RuntimeException("Erro em Adicionar Troca :",ex);
+				            throw new RuntimeException("Erro em Editar Troca :",ex);
 						}
 						
 						txtAmount.setText("");
@@ -291,6 +293,31 @@ public class PanelAdd extends JPanel{
 					}
 				}
 				else if(Home.IDADD == 5 || Home.IDADD == 6) {
+					
+					if(txtName.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Escreva o nome para prosseguir");
+					}
+					else if(txtRegOrAmount.getText().equals("")) {
+						if(Home.IDADD == 2)
+						JOptionPane.showMessageDialog(null, "Escreva a matricula para prosseguir");
+						else JOptionPane.showMessageDialog(null, "Escreva a quantidade para prosseguir");
+					}	else {
+						String name = txtName.getText();
+						
+						try {
+							if(Home.IDADD == 5) MyUtil.editUser(name,txtRegOrAmount.getText(),IDEDIT);
+								else MyUtil.editItem(name, Integer.parseInt(txtRegOrAmount.getText()),IDEDIT);
+						} catch (Exception ex) {
+							throw new RuntimeException("Erro em Adicionar Troca :",ex);
+						}
+						
+						txtName.setText("");
+						txtRegOrAmount.setText("");
+						Home.eventAdd(Home.IDADD);
+						
+						System.out.println(IDEDIT);
+						
+					}
 					
 				}
 

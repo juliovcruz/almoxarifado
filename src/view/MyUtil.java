@@ -67,12 +67,44 @@ public class MyUtil {
 		
 	}
 	
+	public static void editUser(String matricula, String nome,int id) {
+		UserDB fbd = new UserDB();
+		
+		User u = new User(matricula,nome);
+		u.setId(id);
+		fbd.update(u);
+		
+	}
+	
+	public static void delUser(User u) {
+		UserDB fbd = new UserDB();
+
+		fbd.remove(u);
+
+	}
+	
 	public static void addItem(String name, int amount) {
 		ItemDB idb = new ItemDB();
 		
 		Item i = new Item(name,amount);
 		idb.create(i);
 		
+	}
+	
+	public static void editItem(String name, int amount,int id) {
+		ItemDB idb = new ItemDB();
+		
+		Item i = new Item(name,amount);
+		i.setId(id);
+		idb.update(i);
+		
+	}
+	
+	public static void delItem(Item i) {
+		ItemDB idb = new ItemDB();
+
+		idb.remove(i);
+
 	}
 	
 	public static void addTrade(User user, Item item,String descr, int day, int month, int year,int amount) {
@@ -89,7 +121,7 @@ public class MyUtil {
 		tdb.create(t);
 	}
 	
-	public static void editTrade(User user, Item item,String descr, int day, int month, int year,int amount) {
+	public static void editTrade(User user, Item item,String descr, int day, int month, int year,int amount,int id) {
 		String strAmount;
 		if(amount <= 0) {
 			amount *= -1;
@@ -100,8 +132,17 @@ public class MyUtil {
 		TradeDB tdb = new TradeDB();
 		
 		Trade t = new Trade(user,item, descr,day,month,year,strAmount);
+		t.setId(id);
 		tdb.update(t);
 	}
+	
+	public static void delTrade(Trade t) {
+		TradeDB tdb = new TradeDB();
+
+		tdb.remove(t);
+
+	}
+	
 	
 	 public static void LoadListUser(DefaultListModel<User> lista){
 		 ArrayList<User> users = new ArrayList<>();

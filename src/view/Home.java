@@ -240,6 +240,18 @@ public class Home extends JFrame {
 			panelUsers.readUsers();
 		}else if(id == 3) {
 			panelItems.readItems();
+		}else if(id == 4) {
+			panelAdd.setVisible(false);
+			panelTrades.setVisible(true);
+			panelTrades.readTrades();
+		}else if(id == 5) {
+			panelAdd.setVisible(false);
+			panelUsers.readUsers();
+			panelUsers.setVisible(true);
+		}else if(id == 6) {
+			panelAdd.setVisible(false);
+			panelItems.readItems();
+			panelItems.setVisible(true);
 		}
 	}
 	
@@ -247,6 +259,7 @@ public class Home extends JFrame {
 		panelAdd.eventEdit(trd);
 		panelTrades.setVisible(false);
 		IDADD = 4;
+		panelAdd.IDEDIT = trd.getId();
 		panelAdd.AddMode(1);
 		panelAdd.setVisible(true);
 	}
@@ -254,7 +267,8 @@ public class Home extends JFrame {
 	public static void eventEdit(Item item) {
 		panelAdd.eventEdit(item);
 		panelItems.setVisible(false);
-		IDADD = 5;
+		IDADD = 6;
+		panelAdd.IDEDIT = item.getId();
 		panelAdd.AddMode(3);
 		panelAdd.setVisible(true);
 	}
@@ -262,7 +276,8 @@ public class Home extends JFrame {
 	public static void eventEdit(User user) {
 		panelAdd.eventEdit(user);
 		panelUsers.setVisible(false);
-		IDADD = 6;
+		IDADD = 5;
+		panelAdd.IDEDIT = user.getId();
 		panelAdd.AddMode(2);
 		panelAdd.setVisible(true);
 	}

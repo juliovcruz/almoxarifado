@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
 import models.Item;
+import models.User;
 import models.Item;
 
 public class ItemDB {
@@ -38,7 +39,7 @@ public class ItemDB {
 			  Connection con = ConnectionFactory.getConnection();
 			  PreparedStatement stmt = null;
 			      try {
-			          stmt = con.prepareStatement("UPDATE produto SET name = ?,amount = ? WHERE id = ?");
+			          stmt = con.prepareStatement("UPDATE items SET name = ?,amount = ? WHERE id = ?");
 			          stmt.setString(1, item.getName());
 			          stmt.setInt(2, item.getAmount());
 			          stmt.setInt(3, item.getId());
@@ -107,6 +108,24 @@ public class ItemDB {
 	     
 	     return items;
 	     
+	}
+	
+	public void remove(Item i){
+		  Connection con = ConnectionFactory.getConnection();
+		  PreparedStatement stmt = null;
+		      
+		      try {
+		          stmt = con.prepareStatement("DELETE FROM items WHERE id = ?");
+		          stmt.setInt(1, i.getId());
+		          stmt.executeUpdate();
+		          JOptionPane.showMessageDialog(null,"removido com sucesso");
+		      } catch (SQLException ex) {
+		          JOptionPane.showMessageDialog(null,"Erro ao remover "+ex);
+		      }finally{
+		       ConnectionFactory.closeConnection(con, stmt);
+		      
+		      }
+		      
 	}
 	
 }
