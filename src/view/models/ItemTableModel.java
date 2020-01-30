@@ -2,13 +2,12 @@ package view.models;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import models.Item;
 
-import models.Trade;
-
-public class TradeTableModel extends AbstractTableModel{
+public class ItemTableModel extends AbstractTableModel{
 	
-	public ArrayList<Trade> data = new ArrayList<>();
-    private String[] collumns = {"Matricula","Nome","Item","Data","Descricao","Quantidade"};
+	public ArrayList<Item> data = new ArrayList<>();
+    private String[] collumns = {"Nome","Quantidade"};
 
     @Override
     public String getColumnName(int column) {
@@ -27,30 +26,20 @@ public class TradeTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-    	
-    	String date = data.get(linha).getDay() + "/" +  data.get(linha).getMonth() + "/" +  data.get(linha).getYear();
         
         switch(coluna){
             case 0:
-                return data.get(linha).getUserName();
+                return data.get(linha).getName();
             case 1:
-            	return data.get(linha).getUserReg();
-            case 2:
-                return data.get(linha).getItemName();
-            case 3:
-            	return date;
-            case 4:
-            	return data.get(linha).getDescr();
-            case 5:
-            	return data.get(linha).getAmount();
+                return data.get(linha).getAmount();
         }
         
         return null;
         
     }
     
-    public void addRow(Trade f){
-        this.data.add(f);
+    public void addRow(Item item){
+        this.data.add(item);
         this.fireTableDataChanged();
     }
     

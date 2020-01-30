@@ -12,59 +12,59 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import models.User;
-import modelsDB.UserDB;
+import models.Trade;
+import modelsDB.TradeDB;
 import view.models.*;
-
+import view.Home;
 import view.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class PanelUsers extends JPanel{
+public class PanelTrades extends JPanel{
 	
 	private JTextField txtFilter;
-	private UserTableModel modelFuncs = new UserTableModel();
+	private TradeTableModel modelTrades = new TradeTableModel();
+	private ArrayList<Trade> trades = new ArrayList<>();;
 	private JTable JTableFuncs;
 	private JScrollPane TableFuncs;
 	public JLabel IconAdd;
 	public JLabel IconEdit;
-	private ArrayList<User> users = new ArrayList<>();
 	
-	public UserTableModel getModel() {
-		return modelFuncs;
+	public TradeTableModel getModel() {
+		return modelTrades;
 	}
 	
-	public void readUsers() {
+	public void readTrades() {
 		
-		modelFuncs.resetRow();
+		modelTrades.resetRow();
+
+		trades.removeAll(trades);
+
 		
-		users.removeAll(users);
+		TradeDB tdb = new TradeDB();
 		
-		UserDB fbd = new UserDB();
-		
-		for(User f: fbd.read()) {
-			users.add(f);	
+		for(Trade i: tdb.read()) {
+			trades.add(i);	
 		}
 		
-		for(int i =0;i<users.size();i++) {
-			modelFuncs.addRow(users.get(i));
+		for(int i =0;i<trades.size();i++) {
+			modelTrades.addRow(trades.get(i));
 		}
 	}
 	
-	public void readUsers(String filter, UserTableModel model) {
+	public void readTrades(String filter, TradeTableModel model) {
 		
-		modelFuncs.resetRow();
+		modelTrades.resetRow();
+		trades.removeAll(trades);
 		
-		users.removeAll(users);
+		TradeDB tdb = new TradeDB();
 		
-		UserDB fbd = new UserDB();
-		
-		for(User f: fbd.readFilter(filter)) {
-			users.add(f);	
+		for(Trade i: tdb.readFilter(filter)) {
+			trades.add(i);	
 		}
 		
-		for(int i =0;i<users.size();i++) {
-			model.addRow(users.get(i));
+		for(int i =0;i<trades.size();i++) {
+			model.addRow(trades.get(i));
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class PanelUsers extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				readUsers(txtFilter.getText(), modelFuncs);
+				readTrades(txtFilter.getText(), modelTrades);
 				txtFilter.setText("");
 			}
 		});
@@ -90,7 +90,7 @@ public class PanelUsers extends JPanel{
 		add(IconSearch);
 	}
 	
-	public PanelUsers(){
+	public PanelTrades(){
 		setBackground(MyUtil.BG);
 		setBounds(230, 125, 770, 475);
 		setLayout(null);
@@ -101,7 +101,7 @@ public class PanelUsers extends JPanel{
 			@Override
 			public void keyPressed(KeyEvent evt) {
 				if(evt.getKeyCode() == KeyEvent.VK_ENTER){  
-					readUsers(txtFilter.getText(), modelFuncs);
+					readTrades(txtFilter.getText(), modelTrades);
 					txtFilter.setText("");
 				}
 			}
@@ -113,7 +113,7 @@ public class PanelUsers extends JPanel{
 		
 		iconButton16px();
 		
-		JTableFuncs = new JTable(modelFuncs);
+		JTableFuncs = new JTable(modelTrades);
 		TableFuncs = new JScrollPane(JTableFuncs);
 		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		add(TableFuncs);
@@ -131,7 +131,7 @@ public class PanelUsers extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				
+				Home.eventEdit(trades.get(JTableFuncs.getSelectedRow()));
 			}
 		});
 		IconEdit.setBounds(720, 15, 16, 16);
@@ -147,6 +147,10 @@ public class PanelUsers extends JPanel{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {	
+				
 			}
 		});
 		IconAdd.setBounds(695, 15, 16, 16);
@@ -171,7 +175,8 @@ public class PanelUsers extends JPanel{
 		IconRemove.setBounds(670, 15, 16, 16);
 		add(IconRemove);
 		
-		readUsers();
+		readTrades();
 		
 	}
+
 }

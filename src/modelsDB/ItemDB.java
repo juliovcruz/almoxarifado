@@ -87,12 +87,12 @@ public class ItemDB {
 	     ArrayList<Item> items = new ArrayList<Item>();
 	     
 	     try {
-			stmt = con.prepareStatement("SELECT * FROM users WHERE name LIKE ?");
+			stmt = con.prepareStatement("SELECT * FROM items WHERE name LIKE ?");
 			stmt.setString(1, "%"+filter+"%");
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-	            Item i= new Item();
+	            Item i= new Item(); 
 	            i.setId(rs.getInt("id"));
 	            i.setAmount(rs.getInt("amount"));
 	            i.setName(rs.getString("name"));

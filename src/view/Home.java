@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import models.Item;
+import models.Trade;
 import models.User;
 
 import java.awt.Color;
@@ -32,6 +33,8 @@ import java.awt.FlowLayout;
 import javax.swing.JTable;
 
 import view.components.PanelAdd;
+import view.components.PanelItems;
+import view.components.PanelTrades;
 import view.components.PanelUsers;
 import view.components.btnMenuLeft;
 
@@ -54,10 +57,13 @@ public class Home extends JFrame {
 
 	public static int IDADD = 2; // 1 = TRADE | 2 = USER | 3 = ITEM
 	private JPanel backMain;
-	PanelUsers panelUsers;
 	private JTextField txtName;
 	private JTextField txtRegOrAmount;
-	private PanelAdd panelAdd;
+	private static PanelAdd panelAdd;
+	private static PanelUsers panelUsers;
+	private static PanelItems panelItems;
+	private static PanelTrades panelTrades;
+	private ArrayList<btnMenuLeft> btnsMenuLeft;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -134,12 +140,18 @@ public class Home extends JFrame {
 		panelUsers = new PanelUsers();
 		backMain.add(panelUsers);
 		
+		panelItems = new PanelItems();
+		backMain.add(panelItems);
+		
+		panelTrades = new PanelTrades();
+		backMain.add(panelTrades);
+		
 		panelAdd = new PanelAdd(1);
 		panelAdd.setVisible(false);
 		backMain.add(panelAdd);
-
+		 
 		// Adicionando Menus Laterais
-		final ArrayList<btnMenuLeft> btnsMenuLeft = new ArrayList<>();
+		btnsMenuLeft = new ArrayList<>();
 		String strMenuLeft[] = {"Principal","Usuarios","Histórico de Trocas", "Itens", "Adicionar Troca", "Adicionar Usuário", "Adicionar Item"};
 		for(int j=125,i=0; i<strMenuLeft.length ;j+=40,i++) {
 			btnsMenuLeft.add(new btnMenuLeft(j,strMenuLeft[i]));
@@ -156,12 +168,26 @@ public class Home extends JFrame {
 						
 						lblHeader.setText(btnsMenuLeft.get(indexj).getTxt());
 						if(indexj == 1) {
+							//panelUsers.readUsers();
 							panelUsers.setVisible(true);
 						}else {
 							panelUsers.setVisible(false);
 						}
+						if(indexj == 2) {
+							//panelTrades.readTrades();
+							panelTrades.setVisible(true);
+						}else {
+							panelTrades.setVisible(false);
+						}
+						if(indexj == 3) {
+							//panelItems.readItems();
+							panelItems.setVisible(true);
+						}else {
+							panelItems.setVisible(false);
+						}
 						if(indexj >3 && indexj <7) {
 							int ID = indexj - 3;
+							IDADD =  indexj - 3;
 							panelAdd.AddMode(ID);
 							panelAdd.setVisible(true);
 						}else {
@@ -179,6 +205,49 @@ public class Home extends JFrame {
 			
 		});
 		}
+		
+		panelUsers.IconAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {	
+				panelUsers.setVisible(false);
+				panelAdd.AddMode(2);
+				panelAdd.setVisible(true);
+			}
+		});
+		panelTrades.IconAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {	
+				panelTrades.setVisible(false);
+				panelAdd.AddMode(1);
+				panelAdd.setVisible(true);
+			}
+		});
+		panelItems.IconAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {	
+				panelItems.setVisible(false);
+				panelAdd.AddMode(3);
+				panelAdd.setVisible(true);
+			}
+		});
 	
 	}
+	
+	public static void eventAdd(int id) {
+		if(id == 1) {
+			panelTrades.readTrades();
+		}else if(id == 2) {
+			panelUsers.readUsers();
+		}else if(id == 3) {
+			panelItems.readItems();
+		}
+	}
+	
+	public static void eventEdit(Trade trd) {
+		panelAdd.eventEdit(trd);
+		panelTrades.setVisible(false);
+		panelAdd.setVisible(true);
+	}
+	
+	
 }

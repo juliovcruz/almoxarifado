@@ -19,7 +19,7 @@ public class TradeDB {
 		java.sql.PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO trades (id_user,id_item,descr,day,month,year,user_name,item_name,user_reg)VALUES(?,?,?,?,?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO trades (id_user,id_item,descr,day,month,year,user_name,item_name,user_reg,amount)VALUES(?,?,?,?,?,?,?,?,?,?)");
 			stmt.setInt(1, trade.getUser().getId());
 			stmt.setInt(2, trade.getItem().getId());
 			stmt.setString(3, trade.getDescr());
@@ -29,6 +29,7 @@ public class TradeDB {
 			stmt.setString(7, trade.getUser().getName());
 			stmt.setString(8, trade.getItem().getName());
 			stmt.setString(9, trade.getUser().getReg());
+			stmt.setString(10, trade.getAmount());
 			stmt.executeUpdate();
 			
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -53,6 +54,8 @@ public class TradeDB {
 			while(rs.next()) {
 				Trade trd = new Trade();
 	            trd.setId(rs.getInt("id"));
+	            trd.setId_item(rs.getInt("id_item"));
+	            trd.setId_user(rs.getInt("id_user"));
 	            trd.setUserName(rs.getString("user_name"));
 	            trd.setItemName(rs.getString("item_name"));
 	            trd.setDay(rs.getInt("day"));
@@ -60,6 +63,7 @@ public class TradeDB {
 	            trd.setYear(rs.getInt("year"));
 	            trd.setDescr(rs.getString("descr"));
 	            trd.setUserReg(rs.getString("user_reg"));
+	            trd.setAmount(rs.getString("amount"));
 	            trds.add(trd);
 			}
 			
@@ -96,6 +100,7 @@ public class TradeDB {
 	            trd.setYear(rs.getInt("year"));
 	            trd.setDescr(rs.getString("descr"));
 	            trd.setUserReg(rs.getString("user_reg"));
+	            trd.setAmount(rs.getString("amount"));
 	            trds.add(trd);
 			}
 			

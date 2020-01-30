@@ -75,10 +75,17 @@ public class MyUtil {
 		
 	}
 	
-	public static void addTrade(User user, Item item,String descr, int day, int month, int year) {
+	public static void addTrade(User user, Item item,String descr, int day, int month, int year,int amount) {
+		String strAmount;
+		if(amount <= 0) {
+			amount *= -1;
+			strAmount = " - " + amount;
+		}
+		else strAmount = " + " + amount;
+			
 		TradeDB tdb = new TradeDB();
 		
-		Trade t = new Trade(user,item, descr,day,month,year);
+		Trade t = new Trade(user,item, descr,day,month,year,strAmount);
 		tdb.create(t);
 	}
 	

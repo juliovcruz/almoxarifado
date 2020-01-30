@@ -6,8 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,6 +24,7 @@ import javax.swing.SwingConstants;
 import models.*;
 import view.Home;
 import view.MyUtil;
+import javax.swing.JRadioButton;
 
 public class PanelAdd extends JPanel{
 	
@@ -41,26 +44,42 @@ public class PanelAdd extends JPanel{
 	private JComboBox comboDay;
 	private JScrollPane listaItem;
 	private JScrollPane listaUser;
+	private JLabel lblAmount;
+	private JRadioButton rdbtnRemove;
+	private JTextField txtAmount;
+	private JRadioButton rdbtnAdd;
 	// 2 & 3
 	private JLabel lblName;
 	private JLabel lblRegOrAmount;
 	private JTextField txtName;
 	private JTextField txtRegOrAmount;
 	
+	private JList<User> ListUser;
+	private JList<Item> ListItem;
+	private DefaultListModel<Item> Itemlist;
+	private DefaultListModel<User> Userlist;
+	private JLabel IconCorrect;
+	
+	
+	public void readLists() {
+		MyUtil.LoadListItem(Itemlist);	
+		MyUtil.LoadListUser(Userlist);
+	}
+	
 	public PanelAdd(int ID) {
 		setBounds(230, 125, 770, 475);
 		setLayout(null);
 		
-		DefaultListModel<User> Userlist = new DefaultListModel();
-		JList<User> ListUser = new JList<User>(Userlist);
+		Userlist = new DefaultListModel();
+		ListUser = new JList<User>(Userlist);
 		listaUser = new JScrollPane(ListUser);
 		MyUtil.LoadListUser(Userlist);
 		listaUser.setBounds(180, 181, 110, 230);
 		add(listaUser);
 		listaUser.setVisible(false);
 		
-		DefaultListModel<Item> Itemlist = new DefaultListModel();
-		JList<Item> ListItem = new JList<Item>(Itemlist);
+		Itemlist = new DefaultListModel();
+		ListItem = new JList<Item>(Itemlist);
 		listaItem = new JScrollPane(ListItem);
 		MyUtil.LoadListItem(Itemlist);		
 		listaItem.setBounds(10, 181, 110, 230);
@@ -90,7 +109,7 @@ public class PanelAdd extends JPanel{
 		add(lblDay);
 		lblDay.setVisible(false);
 
-		lblMonth = new JLabel("M\u00EAs:");
+		lblMonth = new JLabel("Mes:");
 		lblMonth.setBounds(116, 86, 46, 14);
 		add(lblMonth);
 		lblMonth.setVisible(false);
@@ -101,8 +120,9 @@ public class PanelAdd extends JPanel{
 		lblYear.setVisible(false);
 
 		lblDate = new JLabel("Utilizar a data de Hoje ?");
+		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDate.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		lblDate.setBounds(70, 18, 123, 14);
+		lblDate.setBounds(22, 18, 171, 14);
 		add(lblDate);
 		lblDate.setVisible(false);
 
@@ -118,7 +138,7 @@ public class PanelAdd extends JPanel{
 		add(lblItem);
 		lblItem.setVisible(false);
 
-		lblUser = new JLabel("Usu�rio:");
+		lblUser = new JLabel("Usuario:");
 		lblUser.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		lblUser.setBounds(206, 160, 84, 15);
 		add(lblUser);
@@ -142,7 +162,7 @@ public class PanelAdd extends JPanel{
 
 		
 		ImageIcon imgCorrect= new ImageIcon("src/imgs/correct32.png");
-		JLabel IconCorrect = new JLabel(imgCorrect);
+		IconCorrect = new JLabel(imgCorrect);
 		IconCorrect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -158,30 +178,44 @@ public class PanelAdd extends JPanel{
 				if(Home.IDADD == 1) {
 					
 					if(ListUser.getSelectedIndex() < 0 ||  ListItem.getSelectedIndex() < 0) {
-						JOptionPane.showMessageDialog(null, "N�o foi selecionado um item ou usuario");
+						JOptionPane.showMessageDialog(null, "Nao foi selecionado um item ou usuario");
+					} else if(txtAmount.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Sem quantidade!");
 					} else {
 					
-						int day=0,month=0,year=0;
+						int day=0,month=0,year=0,amount = 0;
 						
 							if(chckBoxYesDate.isSelected()) {
 								day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 								year = Calendar.getInstance().get(Calendar.YEAR);
 								month = Calendar.getInstance().get(Calendar.MONTH);
+								month++;
 							}else {
 								day = Integer.parseInt(comboDay.getSelectedItem().toString());
-								month = Integer.parseInt(comboDay.getSelectedItem().toString());
-								year = Integer.parseInt(comboDay.getSelectedItem().toString());
+								month = Integer.parseInt(comboMonth.getSelectedItem().toString());
+								year = Integer.parseInt(comboYear.getSelectedItem().toString());
+							}
+							
+							if(rdbtnRemove.isSelected()) {
+								amount = Integer.parseInt(txtAmount.getText());
+								amount *= -1;
+							}else {
+								amount = Integer.parseInt(txtAmount.getText());
 							}
 						
 						
 						String descr = Txtdescr.getText();
-						if(descr == null) descr = "Sem descri��o";
+						if(descr == null) descr = "Sem descricao";
 						
 						try {
-						MyUtil.addTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year );
+						MyUtil.addTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount);
 						}	catch (Exception ex) {
 				            throw new RuntimeException("Erro em Adicionar Troca :",ex);
 						}
+						
+						txtAmount.setText("");
+						Txtdescr.setText("");
+						Home.eventAdd(Home.IDADD);
 					
 					}
 					
@@ -205,6 +239,11 @@ public class PanelAdd extends JPanel{
 						} catch (Exception ex) {
 							throw new RuntimeException("Erro em Adicionar Troca :",ex);
 						}
+						
+						txtName.setText("");
+						txtRegOrAmount.setText("");
+						Home.eventAdd(Home.IDADD);
+						
 					}
 				}
 
@@ -257,7 +296,29 @@ public class PanelAdd extends JPanel{
 		lblName.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		lblName.setBounds(53, 28, 87, 14);
 		add(lblName);
-		lblName.setVisible(false);
+		
+		ButtonGroup addOrRemove = new ButtonGroup();
+		rdbtnAdd = new JRadioButton("Adicionando");
+		rdbtnAdd.setSelected(true);
+		rdbtnAdd.setBounds(418, 160, 96, 23);
+		add(rdbtnAdd);
+		rdbtnRemove = new JRadioButton("Removendo");
+		rdbtnRemove.setBounds(516, 160, 96, 23);
+		add(rdbtnRemove);
+		addOrRemove.add(rdbtnAdd);
+		addOrRemove.add(rdbtnRemove);
+		
+		txtAmount = new JTextField();
+		txtAmount.setText("");
+		txtAmount.setBounds(516, 193, 96, 20);
+		add(txtAmount);
+		txtAmount.setColumns(10);
+		
+		lblAmount = new JLabel("Quantidade:");
+		lblAmount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAmount.setBounds(409, 196, 105, 14);
+		add(lblAmount);
+		lblAmount.setVisible(false);
 		
 		AddMode(ID);
 		
@@ -265,6 +326,7 @@ public class PanelAdd extends JPanel{
 	
 	public void AddMode(int ID) {
 		if(ID == 1) {
+			//readLists();
 			lblYear.setVisible(true);
 			lblDate.setVisible(true);
 			lblMonth.setVisible(true);
@@ -280,11 +342,16 @@ public class PanelAdd extends JPanel{
 			comboDay.setVisible(true);
 			listaItem.setVisible(true);
 			listaUser.setVisible(true);
+			rdbtnRemove.setVisible(true);
+			txtAmount.setVisible(true);
+			rdbtnAdd.setVisible(true);
+			lblAmount.setVisible(true);
 			// 2 & 3
 			lblName.setVisible(false);
 			lblRegOrAmount.setVisible(false);
 			txtName.setVisible(false);
 			txtRegOrAmount.setVisible(false);
+			
 		}else{
 			lblYear.setVisible(false);
 			lblDate.setVisible(false);
@@ -301,6 +368,10 @@ public class PanelAdd extends JPanel{
 			comboDay.setVisible(false);
 			listaItem.setVisible(false);
 			listaUser.setVisible(false);
+			rdbtnRemove.setVisible(false);
+			txtAmount.setVisible(false);
+			rdbtnAdd.setVisible(false);
+			lblAmount.setVisible(false);
 			// 2 & 3
 			lblName.setVisible(true);
 			lblRegOrAmount.setVisible(true);
@@ -311,6 +382,36 @@ public class PanelAdd extends JPanel{
 			
 		}
 
+	}
+	
+	public void eventEdit(Trade trd) {
+		chckBoxYesDate.setSelected(false);
+		String amount[] = trd.getAmount().split(" ");
+			if(amount[1].equals("+")) rdbtnAdd.setSelected(true);
+			else if(amount[1].equals("-")) rdbtnRemove.setSelected(true);
+		txtAmount.setText(amount[2]);
+		int index = 0;
+		for(int i =0;i<Itemlist.getSize();i++) {
+			if(Itemlist.get(i).getId() == trd.getId_item()) {
+				index = i;
+				break;
+			}
+		}
+		ListItem.setSelectedIndex(index);
+		index = 0;
+		for(int i =0;i<Userlist.getSize();i++) {
+			if(Userlist.get(i).getId() == trd.getId_user()) {
+				index = i;
+				break;
+			}
+		}
+		ListUser.setSelectedIndex(index);
+			
+		Txtdescr.setText(trd.getDescr());
+		comboDay.setSelectedIndex(trd.getDay()-1);
+		comboMonth.setSelectedIndex(trd.getMonth()-1);
+		comboYear.setSelectedIndex(trd.getYear()-2019);
+		
 	}
 	
 }

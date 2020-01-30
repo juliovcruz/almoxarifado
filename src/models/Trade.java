@@ -18,8 +18,11 @@ public class Trade {
 	private String userName;
 	private String itemName;
 	private String userReg;
+	private String amount;
+	private int id_user;
+	private int id_item;
 	
-	public Trade(User user, Item item, String descr, int day, int month, int year) {
+	public Trade(User user, Item item, String descr, int day, int month, int year,String amount) {
 		this.user = user;
 		this.item = item;
 		this.descr = descr;
@@ -27,19 +30,21 @@ public class Trade {
 		this.month = month;
 		this.year = year;
 		this.date = day + "/" + month + "/" + year;
+		this.amount = amount;
 	}
 	
 	public Trade() {
 		
 	}
 
-	public Trade(Item item, String descr, int day, int month, int year) {
+	public Trade(Item item, String descr, int day, int month, int year,String amount) {
 		this.item = item;
 		this.descr = descr;
 		this.day = day;
 		this.month = month;
 		this.year = year;
 		this.date = day + "/" + month + "/" + year;
+		this.amount = amount;
 	}
 
 }
