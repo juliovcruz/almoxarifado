@@ -4,17 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
-import models.Funcionario;
-import modelsBd.FuncionarioBD;
-import view.models.FuncionarioTableModel;
-import models.Funcionario;
+import models.Item;
+import models.Trade;
+import models.User;
+import modelsDB.ItemDB;
+import modelsDB.TradeDB;
+import modelsDB.UserDB;
+
 public class MyUtil {
 	
 	public static Color BG = new Color(238,240,242);
@@ -52,17 +55,57 @@ public class MyUtil {
 		scroll.setBackground(BG);
 	}
 	
-	
 	public static Color BG() {
 		return new Color(238,240,242);
 	}
 	
-	public static void addFunc(String matricula, String nome) {
-		FuncionarioBD fbd = new FuncionarioBD();
+	public static void addUser(String matricula, String nome) {
+		UserDB fbd = new UserDB();
 		
-		Funcionario f = new Funcionario(matricula,nome);
+		User f = new User(matricula,nome);
 		fbd.create(f);
 		
 	}
+	
+	public static void addItem(String name, int amount) {
+		ItemDB idb = new ItemDB();
+		
+		Item i = new Item(name,amount);
+		idb.create(i);
+		
+	}
+	
+	public static void addTrade(User user, Item item,String descr, int day, int month, int year) {
+		TradeDB tdb = new TradeDB();
+		
+		Trade t = new Trade(user,item, descr,day,month,year);
+		tdb.create(t);
+	}
+	
+	 public static void LoadListUser(DefaultListModel<User> lista){
+		 ArrayList<User> users = new ArrayList<>();
+		 UserDB ubd = new UserDB();
+			
+			for(User f: ubd.read()) {
+				users.add(f);	
+			}
+         lista.clear();
+         for (User user: users) {
+             lista.addElement(user);
+             }
+     }
+	 
+	 public static void LoadListItem(DefaultListModel<Item> lista) {
+		 ArrayList<Item> items = new ArrayList<>();
+		 ItemDB ibd = new ItemDB();
+			
+			for(Item f: ibd.read()) {
+				items.add(f);	
+			}
+         lista.clear();
+         for (Item item: items) {
+             lista.addElement(item);
+             }
+	 }
 
 }

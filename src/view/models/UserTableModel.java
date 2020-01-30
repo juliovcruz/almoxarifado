@@ -2,26 +2,26 @@ package view.models;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import models.Funcionario;
+import models.User;
 
-public class FuncionarioTableModel extends AbstractTableModel{
+public class UserTableModel extends AbstractTableModel{
 	
-	public ArrayList<Funcionario> dados = new ArrayList<>();
-    private String[] colunas = {"Nome","Matricula"};
+	public ArrayList<User> data = new ArrayList<>();
+    private String[] collumns = {"Matricula","Nome"};
 
     @Override
     public String getColumnName(int column) {
-        return colunas[column]; //To change body of generated methods, choose Tools | Templates.
+        return collumns[column]; //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
     public int getRowCount() {
-        return dados.size();
+        return data.size();
     }
 
     @Override
     public int getColumnCount() {
-        return colunas.length;
+        return collumns.length;
     }
 
     @Override
@@ -29,22 +29,22 @@ public class FuncionarioTableModel extends AbstractTableModel{
         
         switch(coluna){
             case 0:
-                return dados.get(linha).getNome();
+                return data.get(linha).getReg();
             case 1:
-                return dados.get(linha).getMatricula();
+                return data.get(linha).getName();
         }
         
         return null;
         
     }
     
-    public void addRow(Funcionario f){
-        this.dados.add(f);
+    public void addRow(User f){
+        this.data.add(f);
         this.fireTableDataChanged();
     }
     
     public void removeRow(int linha){
-        this.dados.remove(linha);
+        this.data.remove(linha);
         this.fireTableRowsDeleted(linha, linha);
     }
     

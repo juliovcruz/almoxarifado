@@ -1,9 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
-import view.models.FuncionarioTableModel;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import models.Item;
+import models.User;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -24,12 +27,13 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
-import models.Funcionario;
-import modelsBd.FuncionarioBD;
+
+import view.components.PanelAdd;
+import view.components.PanelUsers;
 import view.components.btnMenuLeft;
-import view.components.panelFuncionarios;
 
 import javax.swing.JTextField;
 import java.awt.Panel;
@@ -37,13 +41,23 @@ import java.awt.Label;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class Home extends JFrame {
 
+	public static int IDADD = 2; // 1 = TRADE | 2 = USER | 3 = ITEM
 	private JPanel backMain;
-	private JTextField txtNome;
-	private JTextField txtMatricula;
-	panelFuncionarios panelFuncs;
+	PanelUsers panelUsers;
+	private JTextField txtName;
+	private JTextField txtRegOrAmount;
+	private PanelAdd panelAdd;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -111,45 +125,27 @@ public class Home extends JFrame {
 		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
 		JHeader.add(lblHeader);
 		
-		txtNome = new JTextField();
-		txtNome.setText("Nome");
-		txtNome.setBounds(631, 27, 86, 20);
-		JHeader.add(txtNome);
-		txtNome.setColumns(10);
-		
-		txtMatricula = new JTextField();
-		txtMatricula.setText("Matricula");
-		txtMatricula.setBounds(631, 51, 86, 20);
-		JHeader.add(txtMatricula);
-		txtMatricula.setColumns(10);
-		
-		JButton btnAddfunc = new JButton("AddFunc");
-		btnAddfunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				MyUtil.addFunc(txtMatricula.getText(), txtNome.getText());
-				panelFuncs.readFuncs();
-			}
-		});
-		btnAddfunc.setBounds(628, 75, 89, 23);
-		JHeader.add(btnAddfunc);
-		
 		JPanel backMenuLateral = new JPanel();
 		backMenuLateral.setBackground(new Color(0,0,52));
 		backMenuLateral.setBounds(0, 0, 230, 600);
 		backMain.add(backMenuLateral);
 		backMenuLateral.setLayout(null);
+		
+		panelUsers = new PanelUsers();
+		backMain.add(panelUsers);
+		
+		panelAdd = new PanelAdd(1);
+		panelAdd.setVisible(false);
+		backMain.add(panelAdd);
 
-		panelFuncs = new panelFuncionarios();
-		backMain.add(panelFuncs);
-		
-		
 		// Adicionando Menus Laterais
 		final ArrayList<btnMenuLeft> btnsMenuLeft = new ArrayList<>();
-		for(int j=125,i=0;j<=245;j+=40,i++) {
-			String strs[] = {"Principal","Usuarios","Histórico de Trocas", "Configurações"};
-			btnsMenuLeft.add(new btnMenuLeft(j,strs[i]));
+		String strMenuLeft[] = {"Principal","Usuarios","Histórico de Trocas", "Itens", "Adicionar Troca", "Adicionar Usuário", "Adicionar Item"};
+		for(int j=125,i=0; i<strMenuLeft.length ;j+=40,i++) {
+			btnsMenuLeft.add(new btnMenuLeft(j,strMenuLeft[i]));
 			backMenuLateral.add(btnsMenuLeft.get(i));
 		}
+
 		for(int i=0;i<btnsMenuLeft.size();i++){
 			final int index = i;
 			btnsMenuLeft.get(i).addMouseListener(new MouseAdapter() {
@@ -160,10 +156,19 @@ public class Home extends JFrame {
 						
 						lblHeader.setText(btnsMenuLeft.get(indexj).getTxt());
 						if(indexj == 1) {
-							panelFuncs.setVisible(true);
+							panelUsers.setVisible(true);
 						}else {
-							panelFuncs.setVisible(false);
+							panelUsers.setVisible(false);
 						}
+						if(indexj >3 && indexj <7) {
+							int ID = indexj - 3;
+							panelAdd.AddMode(ID);
+							panelAdd.setVisible(true);
+						}else {
+							panelAdd.setVisible(false);
+						}
+						
+						
 						
 						if(indexj != j && btnsMenuLeft.get(j).getID() == 1) {
 							btnsMenuLeft.get(j).setID(0);
@@ -174,7 +179,6 @@ public class Home extends JFrame {
 			
 		});
 		}
-		
 	
 	}
 }

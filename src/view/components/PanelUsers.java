@@ -1,6 +1,5 @@
 package view.components;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,33 +12,33 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import models.Funcionario;
-import modelsBd.FuncionarioBD;
+import models.User;
+import modelsDB.UserDB;
 import view.models.*;
 
 import view.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class panelFuncionarios extends JPanel{
+public class PanelUsers extends JPanel{
 	
 	private JTextField txtFilter;
-	private FuncionarioTableModel modelFuncs = new FuncionarioTableModel();
+	private UserTableModel modelFuncs = new UserTableModel();
 	private JTable JTableFuncs;
 	private JScrollPane TableFuncs;
 	
-	public FuncionarioTableModel getModel() {
+	public UserTableModel getModel() {
 		return modelFuncs;
 	}
 	
 	public void readFuncs() {
 		
 		modelFuncs.resetRow();
-		ArrayList<Funcionario> funcs = new ArrayList<>();
+		ArrayList<User> funcs = new ArrayList<>();
 		
-		FuncionarioBD fbd = new FuncionarioBD();
+		UserDB fbd = new UserDB();
 		
-		for(Funcionario f: fbd.read()) {
+		for(User f: fbd.read()) {
 			funcs.add(f);	
 		}
 		
@@ -48,14 +47,14 @@ public class panelFuncionarios extends JPanel{
 		}
 	}
 	
-	public void readFuncsFilter(String filter, FuncionarioTableModel model) {
+	public void readFuncsFilter(String filter, UserTableModel model) {
 		
 		modelFuncs.resetRow();
-		ArrayList<Funcionario> funcs = new ArrayList<>();
+		ArrayList<User> funcs = new ArrayList<>();
 		
-		FuncionarioBD fbd = new FuncionarioBD();
+		UserDB fbd = new UserDB();
 		
-		for(Funcionario f: fbd.readFilter(filter)) {
+		for(User f: fbd.readFilter(filter)) {
 			funcs.add(f);	
 		}
 		
@@ -85,7 +84,7 @@ public class panelFuncionarios extends JPanel{
 		add(IconSearch);
 	}
 	
-	public panelFuncionarios(){
+	public PanelUsers(){
 		setBackground(MyUtil.BG);
 		setBounds(230, 125, 770, 475);
 		setLayout(null);
