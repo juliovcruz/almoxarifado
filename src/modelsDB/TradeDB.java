@@ -41,6 +41,35 @@ public class TradeDB {
 		}
 	}
 	
+public void update(Trade trade) {
+		
+		java.sql.Connection con = ConnectionFactory.getConnection();
+		java.sql.PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE trades SET id_user = ?,id_item = ?,descr = ?,day = ?,month = ?,year = ?,user_name = ?,item_name = ?,user_reg = ?,amount = ? WHERE ID = ?");
+			stmt.setInt(1, trade.getUser().getId());
+			stmt.setInt(2, trade.getItem().getId());
+			stmt.setString(3, trade.getDescr());
+			stmt.setInt(4, trade.getDay());
+			stmt.setInt(5, trade.getMonth());
+			stmt.setInt(6, trade.getYear());
+			stmt.setString(7, trade.getUser().getName());
+			stmt.setString(8, trade.getItem().getName());
+			stmt.setString(9, trade.getUser().getReg());
+			stmt.setString(10, trade.getAmount());
+			stmt.setInt(11, trade.getId());
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Editado com sucesso!");
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao Salvar: " + e);
+		}finally {
+			ConnectionFactory.closeConnection(con,stmt);
+		}
+	}
+	
 	public ArrayList<Trade> read(){
 		java.sql.Connection con = ConnectionFactory.getConnection();
 		java.sql.PreparedStatement stmt = null;

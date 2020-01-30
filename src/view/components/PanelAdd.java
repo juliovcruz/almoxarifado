@@ -222,7 +222,7 @@ public class PanelAdd extends JPanel{
 				}
 				
 				
-				else {
+				else if(Home.IDADD == 2 || Home.IDADD == 3){
 					if(txtName.getText().equals("")) {
 						JOptionPane.showMessageDialog(null, "Escreva o nome para prosseguir");
 					}
@@ -245,6 +245,53 @@ public class PanelAdd extends JPanel{
 						Home.eventAdd(Home.IDADD);
 						
 					}
+				}
+				
+				else if(Home.IDADD == 4) {
+					if(ListUser.getSelectedIndex() < 0 ||  ListItem.getSelectedIndex() < 0) {
+						JOptionPane.showMessageDialog(null, "Nao foi selecionado um item ou usuario");
+					} else if(txtAmount.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Sem quantidade!");
+					} else {
+					
+						int day=0,month=0,year=0,amount = 0;
+						
+							if(chckBoxYesDate.isSelected()) {
+								day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+								year = Calendar.getInstance().get(Calendar.YEAR);
+								month = Calendar.getInstance().get(Calendar.MONTH);
+								month++;
+							}else {
+								day = Integer.parseInt(comboDay.getSelectedItem().toString());
+								month = Integer.parseInt(comboMonth.getSelectedItem().toString());
+								year = Integer.parseInt(comboYear.getSelectedItem().toString());
+							}
+							
+							if(rdbtnRemove.isSelected()) {
+								amount = Integer.parseInt(txtAmount.getText());
+								amount *= -1;
+							}else {
+								amount = Integer.parseInt(txtAmount.getText());
+							}
+						
+						
+						String descr = Txtdescr.getText();
+						if(descr == null) descr = "Sem descricao";
+						
+						try {
+						MyUtil.editTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount);
+						}	catch (Exception ex) {
+				            throw new RuntimeException("Erro em Adicionar Troca :",ex);
+						}
+						
+						txtAmount.setText("");
+						Txtdescr.setText("");
+						Home.eventAdd(Home.IDADD);
+					
+					}
+				}
+				else if(Home.IDADD == 5 || Home.IDADD == 6) {
+					
 				}
 
 			}
@@ -412,6 +459,17 @@ public class PanelAdd extends JPanel{
 		comboMonth.setSelectedIndex(trd.getMonth()-1);
 		comboYear.setSelectedIndex(trd.getYear()-2019);
 		
+	}
+	
+	public void eventEdit(Item item) {
+		String amount = String.valueOf(item.getAmount());
+		txtName.setText(item.getName());
+		txtRegOrAmount.setText(amount);
+	}
+	
+	public void eventEdit(User user) {
+		txtName.setText(user.getName());
+		txtRegOrAmount.setText(user.getReg());
 	}
 	
 }

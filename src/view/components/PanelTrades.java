@@ -132,6 +132,7 @@ public class PanelTrades extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				Home.eventEdit(trades.get(JTableFuncs.getSelectedRow()));
+				
 			}
 		});
 		IconEdit.setBounds(720, 15, 16, 16);

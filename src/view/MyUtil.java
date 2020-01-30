@@ -89,6 +89,20 @@ public class MyUtil {
 		tdb.create(t);
 	}
 	
+	public static void editTrade(User user, Item item,String descr, int day, int month, int year,int amount) {
+		String strAmount;
+		if(amount <= 0) {
+			amount *= -1;
+			strAmount = " - " + amount;
+		}
+		else strAmount = " + " + amount;
+			
+		TradeDB tdb = new TradeDB();
+		
+		Trade t = new Trade(user,item, descr,day,month,year,strAmount);
+		tdb.update(t);
+	}
+	
 	 public static void LoadListUser(DefaultListModel<User> lista){
 		 ArrayList<User> users = new ArrayList<>();
 		 UserDB ubd = new UserDB();

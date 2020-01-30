@@ -55,7 +55,7 @@ import javax.swing.JTextArea;
 
 public class Home extends JFrame {
 
-	public static int IDADD = 2; // 1 = TRADE | 2 = USER | 3 = ITEM
+	public static int IDADD = 2; // 1 = TRADE | 2 = USER | 3 = ITEM | 4 = EDITTRADE | 5 = EDITUSER | 6 = EDITITEM
 	private JPanel backMain;
 	private JTextField txtName;
 	private JTextField txtRegOrAmount;
@@ -246,6 +246,24 @@ public class Home extends JFrame {
 	public static void eventEdit(Trade trd) {
 		panelAdd.eventEdit(trd);
 		panelTrades.setVisible(false);
+		IDADD = 4;
+		panelAdd.AddMode(1);
+		panelAdd.setVisible(true);
+	}
+	
+	public static void eventEdit(Item item) {
+		panelAdd.eventEdit(item);
+		panelItems.setVisible(false);
+		IDADD = 5;
+		panelAdd.AddMode(3);
+		panelAdd.setVisible(true);
+	}
+	
+	public static void eventEdit(User user) {
+		panelAdd.eventEdit(user);
+		panelUsers.setVisible(false);
+		IDADD = 6;
+		panelAdd.AddMode(2);
 		panelAdd.setVisible(true);
 	}
 	

@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import models.User;
 import modelsDB.UserDB;
 import view.models.*;
-
+import view.Home;
 import view.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -131,7 +131,7 @@ public class PanelUsers extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				
+				Home.eventEdit(users.get(JTableFuncs.getSelectedRow()));
 			}
 		});
 		IconEdit.setBounds(720, 15, 16, 16);
