@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/julio/Downloads/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/julio/Downloads/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/Users/julio/Downloads/imgs.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

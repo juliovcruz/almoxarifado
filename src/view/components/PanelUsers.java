@@ -3,6 +3,7 @@ package view.components;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -69,7 +70,8 @@ public class PanelUsers extends JPanel{
 	}
 	
 	private void iconButton16px(){
-		ImageIcon imgSearch = new ImageIcon("src/imgs/search.png");
+		//ImageIcon imgSearch = new ImageIcon("src/imgs/search.png");
+		ImageIcon imgSearch = new ImageIcon(Principal.class.getResource("/search.png"));
 		JLabel IconSearch = new JLabel(imgSearch);
 		IconSearch.addMouseListener(new MouseAdapter() {
 			@Override
@@ -118,7 +120,8 @@ public class PanelUsers extends JPanel{
 		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		add(TableFuncs);
 		
-		ImageIcon imgEdit= new ImageIcon("src/imgs/edit.png");
+		//ImageIcon imgEdit= new ImageIcon("src/imgs/edit.png");
+		ImageIcon imgEdit = new ImageIcon(Principal.class.getResource("/edit.png"));
 		IconEdit= new JLabel(imgEdit);
 		IconEdit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -137,7 +140,8 @@ public class PanelUsers extends JPanel{
 		IconEdit.setBounds(720, 15, 16, 16);
 		add(IconEdit);
 		
-		ImageIcon imgAdd= new ImageIcon("src/imgs/plus.png");
+		//ImageIcon imgAdd= new ImageIcon("src/imgs/plus.png");
+		ImageIcon imgAdd = new ImageIcon(Principal.class.getResource("/plus.png"));
 		IconAdd= new JLabel(imgAdd);
 		IconAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -152,7 +156,8 @@ public class PanelUsers extends JPanel{
 		IconAdd.setBounds(695, 15, 16, 16);
 		add(IconAdd);
 		
-		ImageIcon imgRemove= new ImageIcon("src/imgs/close.png");
+		//ImageIcon imgRemove= new ImageIcon("src/imgs/close.png");
+		ImageIcon imgRemove = new ImageIcon(Principal.class.getResource("/close.png"));
 		JLabel IconRemove= new JLabel(imgRemove);
 		IconRemove.addMouseListener(new MouseAdapter() {
 			@Override

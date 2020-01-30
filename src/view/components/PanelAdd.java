@@ -2,8 +2,11 @@ package view.components;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.Principal;
 import java.util.Calendar;
 
 import javax.swing.ButtonGroup;
@@ -162,8 +165,8 @@ public class PanelAdd extends JPanel{
 		add(lblDescr);
 		lblDescr.setVisible(false);
 
-		
-		ImageIcon imgCorrect= new ImageIcon("src/imgs/correct32.png");
+		//ImageIcon imgCorrect= new ImageIcon("src/imgs/correct32.PNG");
+		ImageIcon imgCorrect= new ImageIcon(Principal.class.getResource("/correct32.png"));
 		IconCorrect = new JLabel(imgCorrect);
 		IconCorrect.addMouseListener(new MouseAdapter() {
 			@Override
@@ -326,7 +329,8 @@ public class PanelAdd extends JPanel{
 		IconCorrect.setBounds(730, 435, 32, 32);
 		add(IconCorrect);
 		
-		ImageIcon imgRefresh= new ImageIcon("src/imgs/refresh32.png");
+		//ImageIcon imgRefresh= new ImageIcon("src/imgs/refresh32.png");
+		ImageIcon imgRefresh= new ImageIcon(Principal.class.getResource("/refresh32.png"));
 		JLabel IconRefresh= new JLabel(imgRefresh);
 		IconRefresh.addMouseListener(new MouseAdapter() {
 			@Override

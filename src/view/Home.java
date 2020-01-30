@@ -25,10 +25,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
 
@@ -87,6 +90,7 @@ public class Home extends JFrame {
 	}
 
 	public Home() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src/imgs/box.png"));
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(new Color(251,255,241));
@@ -232,7 +236,7 @@ public class Home extends JFrame {
 		});
 	
 	}
-	
+
 	public static void eventAdd(int id) {
 		if(id == 1) {
 			panelTrades.readTrades();
