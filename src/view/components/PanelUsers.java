@@ -170,7 +170,8 @@ public class PanelUsers extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				
+				MyUtil.delUser(users.get(JTableFuncs.getSelectedRow()));
+				readUsers();				
 			}
 		});
 		IconRemove.setBounds(670, 15, 16, 16);

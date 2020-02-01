@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.Toolkit;
@@ -95,6 +96,7 @@ public class Home extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(new Color(251,255,241));
 		setBounds(100, 100, 1000, 600);
+		setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
 		backMain = new JPanel();
 		backMain.setBackground(MyUtil.BG);
 		backMain.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -132,7 +134,7 @@ public class Home extends JFrame {
 		JLabel lblHeader = new JLabel("Vai estudar Java");
 		lblHeader.setBounds(48, 27, 550, 60);
 		lblHeader.setForeground(Color.white);
-		lblHeader.setFont(new Font("Segoe UI", Font.BOLD, 45));
+		lblHeader.setFont(new Font("Segoe UI", Font.PLAIN, 45));
 		JHeader.add(lblHeader);
 		
 		JPanel backMenuLateral = new JPanel();
@@ -156,7 +158,7 @@ public class Home extends JFrame {
 		 
 		// Adicionando Menus Laterais
 		btnsMenuLeft = new ArrayList<>();
-		String strMenuLeft[] = {"Principal","Usuarios","Histórico de Trocas", "Itens", "Adicionar Troca", "Adicionar Usuário", "Adicionar Item"};
+		String strMenuLeft[] = {"Principal","Usuarios","Trocas", "Itens", "+ Troca", "+ Usuário", "+ Item"};
 		for(int j=125,i=0; i<strMenuLeft.length ;j+=40,i++) {
 			btnsMenuLeft.add(new btnMenuLeft(j,strMenuLeft[i]));
 			backMenuLateral.add(btnsMenuLeft.get(i));

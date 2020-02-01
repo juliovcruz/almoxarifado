@@ -32,9 +32,9 @@ public class TradeTableModel extends AbstractTableModel{
         
         switch(coluna){
             case 0:
-                return data.get(linha).getUserName();
+                return data.get(linha).getUserReg();
             case 1:
-            	return data.get(linha).getUserReg();
+            	return data.get(linha).getUserName();
             case 2:
                 return data.get(linha).getItemName();
             case 3:

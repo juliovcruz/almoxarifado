@@ -31,6 +31,7 @@ public class MyUtil {
         for (int columnIndex = 0; columnIndex < tableModel.getColumnCount(); columnIndex++)
         {
             table.getColumnModel().getColumn(columnIndex).setCellRenderer(rightRenderer);
+            
         }
     }
 
@@ -42,7 +43,7 @@ public class MyUtil {
 		table.setShowGrid(false);
 		table.setBackground(BG);
 		table.setGridColor(BG);
-		table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		table.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
 		table.getTableHeader().setBackground(BG);
 		table.getTableHeader().setBorder(null);

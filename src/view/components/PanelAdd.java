@@ -279,9 +279,9 @@ public class PanelAdd extends JPanel{
 								amount = Integer.parseInt(txtAmount.getText());
 							}
 						
-						
-						String descr = Txtdescr.getText();
-						if(descr == null) descr = "Sem descricao";
+						String descr;
+						if(Txtdescr.getText().equals("")) descr = "Sem descricao";
+						else descr = Txtdescr.getText();
 						
 						try {
 						MyUtil.editTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount,IDEDIT);
@@ -301,14 +301,14 @@ public class PanelAdd extends JPanel{
 						JOptionPane.showMessageDialog(null, "Escreva o nome para prosseguir");
 					}
 					else if(txtRegOrAmount.getText().equals("")) {
-						if(Home.IDADD == 2)
+						if(Home.IDADD == 5)
 						JOptionPane.showMessageDialog(null, "Escreva a matricula para prosseguir");
 						else JOptionPane.showMessageDialog(null, "Escreva a quantidade para prosseguir");
 					}	else {
 						String name = txtName.getText();
 						
 						try {
-							if(Home.IDADD == 5) MyUtil.editUser(name,txtRegOrAmount.getText(),IDEDIT);
+							if(Home.IDADD == 5) MyUtil.editUser(txtRegOrAmount.getText(),name,IDEDIT);
 								else MyUtil.editItem(name, Integer.parseInt(txtRegOrAmount.getText()),IDEDIT);
 						} catch (Exception ex) {
 							throw new RuntimeException("Erro em Adicionar Troca :",ex);

@@ -1,8 +1,12 @@
 package view.components;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -12,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import models.Item;
 import modelsDB.ItemDB;
@@ -114,7 +121,7 @@ public class PanelItems extends JPanel{
 		
 		iconButton16px();
 		
-		JTableFuncs = new JTable(modelItems);
+		JTableFuncs = new JTable(modelItems);	
 		TableFuncs = new JScrollPane(JTableFuncs);
 		MyUtil.TableFuncionario(JTableFuncs,TableFuncs);
 		add(TableFuncs);
@@ -173,7 +180,8 @@ public class PanelItems extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				
+				MyUtil.delItem(items.get(JTableFuncs.getSelectedRow()));
+				readItems();				
 			}
 		});
 		IconRemove.setBounds(670, 15, 16, 16);
