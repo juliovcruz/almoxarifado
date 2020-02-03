@@ -91,7 +91,8 @@ public class Home extends JFrame {
 	}
 
 	public Home() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/imgs/box.png"));
+		Image image = new ImageIcon(Home.class.getResource("/box.png")).getImage();
+		setIconImage(image);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(new Color(251,255,241));
@@ -131,7 +132,7 @@ public class Home extends JFrame {
 		});
 		JHeader.add(lblExit);
 		
-		JLabel lblHeader = new JLabel("Vai estudar Java");
+		JLabel lblHeader = new JLabel("Principal");
 		lblHeader.setBounds(48, 27, 550, 60);
 		lblHeader.setForeground(Color.white);
 		lblHeader.setFont(new Font("Segoe UI", Font.PLAIN, 45));

@@ -71,7 +71,7 @@ public class PanelTrades extends JPanel{
 	
 	private void iconButton16px(){
 		//ImageIcon imgSearch = new ImageIcon("src/imgs/search.png");
-		ImageIcon imgSearch = new ImageIcon(Principal.class.getResource("/search.png"));
+		ImageIcon imgSearch = new ImageIcon(Home.class.getResource("/search.png"));
 		JLabel IconSearch = new JLabel(imgSearch);
 		IconSearch.addMouseListener(new MouseAdapter() {
 			@Override
@@ -121,7 +121,7 @@ public class PanelTrades extends JPanel{
 		add(TableFuncs);
 		
 		//ImageIcon imgEdit= new ImageIcon("src/imgs/edit.png");
-		ImageIcon imgEdit = new ImageIcon(Principal.class.getResource("/edit.png"));
+		ImageIcon imgEdit = new ImageIcon(Home.class.getResource("/edit.png"));
 		IconEdit= new JLabel(imgEdit);
 		IconEdit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -141,7 +141,7 @@ public class PanelTrades extends JPanel{
 		add(IconEdit);
 		
 		//ImageIcon imgAdd= new ImageIcon("src/imgs/plus.png");
-		ImageIcon imgAdd = new ImageIcon(Principal.class.getResource("/plus.png"));
+		ImageIcon imgAdd = new ImageIcon(Home.class.getResource("/plus.png"));
 		IconAdd= new JLabel(imgAdd);
 		IconAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -161,7 +161,7 @@ public class PanelTrades extends JPanel{
 		add(IconAdd);
 		
 		//ImageIcon imgRemove= new ImageIcon("src/imgs/close.png");
-		ImageIcon imgRemove = new ImageIcon(Principal.class.getResource("/close.png"));
+		ImageIcon imgRemove = new ImageIcon(Home.class.getResource("/close.png"));
 		JLabel IconRemove= new JLabel(imgRemove);
 		IconRemove.addMouseListener(new MouseAdapter() {
 			@Override

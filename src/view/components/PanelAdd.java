@@ -166,7 +166,7 @@ public class PanelAdd extends JPanel{
 		lblDescr.setVisible(false);
 
 		//ImageIcon imgCorrect= new ImageIcon("src/imgs/correct32.PNG");
-		ImageIcon imgCorrect= new ImageIcon(Principal.class.getResource("/correct32.png"));
+		ImageIcon imgCorrect= new ImageIcon(Home.class.getResource("/correct32.png"));
 		IconCorrect = new JLabel(imgCorrect);
 		IconCorrect.addMouseListener(new MouseAdapter() {
 			@Override
@@ -330,7 +330,7 @@ public class PanelAdd extends JPanel{
 		add(IconCorrect);
 		
 		//ImageIcon imgRefresh= new ImageIcon("src/imgs/refresh32.png");
-		ImageIcon imgRefresh= new ImageIcon(Principal.class.getResource("/refresh32.png"));
+		ImageIcon imgRefresh= new ImageIcon(Home.class.getResource("/refresh32.png"));
 		JLabel IconRefresh= new JLabel(imgRefresh);
 		IconRefresh.addMouseListener(new MouseAdapter() {
 			@Override
