@@ -1,7 +1,11 @@
 # ALMOXARIFADO
 
-## AnotaÁıes
+## Anota√ß√µes
 
 https://start.spring.io/ -- Iniciar Projeto
 
---- Projeto n„o finalizado
+--- Projeto n√£o finalizado
+
+Link para baixar o execut√°vel:
+
+https://bit.ly/2RUGOG1
