@@ -13,9 +13,9 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10320407";
-    private static final String USER = "sql10320407";
-    private static final String PASS = "XAUJQWRLez";
+    private static final String URL = "jdbc:mysql://remotemysql.com:3306/fZERn5uokw";
+    private static final String USER = "fZERn5uokw";
+    private static final String PASS = "RJdTW3Xprw";
     
     public static java.sql.Connection getConnection() {
     	
