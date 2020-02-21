@@ -91,8 +91,9 @@ public class Home extends JFrame {
 	}
 
 	public Home() {
-		Image image = new ImageIcon(Home.class.getResource("/box.png")).getImage();
-		setIconImage(image);
+		//Image image = new ImageIcon(Home.class.getResource("/box.png")).getImage();
+		//Image image = new ImageIcon("src/imgs/edit.png").getImage();
+		//setIconImage(image);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(new Color(251,255,241));
