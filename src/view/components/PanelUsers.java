@@ -135,6 +135,7 @@ public class PanelUsers extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				Home.eventEdit(users.get(JTableFuncs.getSelectedRow()));
+				System.out.println(users.get(JTableFuncs.getSelectedRow()));
 			}
 		});
 		IconEdit.setBounds(720, 15, 16, 16);

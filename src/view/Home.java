@@ -159,7 +159,7 @@ public class Home extends JFrame {
 		 
 		// Adicionando Menus Laterais
 		btnsMenuLeft = new ArrayList<>();
-		String strMenuLeft[] = {"Principal","Usuarios","Trocas", "Itens", "+ Troca", "+ Usuário", "+ Item"};
+		String strMenuLeft[] = {"Principal","Usuarios","Trocas", "Itens"};
 		for(int j=125,i=0; i<strMenuLeft.length ;j+=40,i++) {
 			btnsMenuLeft.add(new btnMenuLeft(j,strMenuLeft[i]));
 			backMenuLateral.add(btnsMenuLeft.get(i));
@@ -191,14 +191,6 @@ public class Home extends JFrame {
 							panelItems.setVisible(true);
 						}else {
 							panelItems.setVisible(false);
-						}
-						if(indexj >3 && indexj <7) {
-							int ID = indexj - 3;
-							IDADD =  indexj - 3;
-							panelAdd.AddMode(ID);
-							panelAdd.setVisible(true);
-						}else {
-							panelAdd.setVisible(false);
 						}
 						
 						

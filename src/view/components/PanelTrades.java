@@ -20,6 +20,7 @@ import view.Home;
 import view.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
 
 public class PanelTrades extends JPanel{
 	
@@ -30,6 +31,8 @@ public class PanelTrades extends JPanel{
 	private JScrollPane TableFuncs;
 	public JLabel IconAdd;
 	public JLabel IconEdit;
+	private JComboBox<String> comboDays;
+	private JComboBox<String> comboMonths;
 	
 	public TradeTableModel getModel() {
 		return modelTrades;
@@ -69,6 +72,22 @@ public class PanelTrades extends JPanel{
 		}
 	}
 	
+	public void readTrades(String filter,int Sday,int Smonth, TradeTableModel model) {
+		
+		modelTrades.resetRow();
+		trades.removeAll(trades);
+		
+		TradeDB tdb = new TradeDB();
+		
+		for(Trade i: tdb.readFilterDate(filter,Sday,Smonth)) {
+			trades.add(i);	
+		}
+		
+		for(int i =0;i<trades.size();i++) {
+			model.addRow(trades.get(i));
+		}
+	}
+	
 	private void iconButton16px(){
 		//ImageIcon imgSearch = new ImageIcon("src/imgs/search.png");
 		ImageIcon imgSearch = new ImageIcon(Home.class.getResource("/search.png"));
@@ -84,11 +103,12 @@ public class PanelTrades extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				readTrades(txtFilter.getText(), modelTrades);
+				//readTrades(txtFilter.getText(), modelTrades);
+				readTrades(txtFilter.getText(),comboDays.getSelectedIndex(), comboMonths.getSelectedIndex(), modelTrades);
 				txtFilter.setText("");
 			}
 		});
-		IconSearch.setBounds(190, 12, 16, 16);
+		IconSearch.setBounds(375, 15, 16, 16);
 		add(IconSearch);
 	}
 	
@@ -181,8 +201,17 @@ public class PanelTrades extends JPanel{
 		IconRemove.setBounds(670, 15, 16, 16);
 		add(IconRemove);
 		
+		String days[] = {"","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+		comboDays = new JComboBox<String>(days);
+		comboDays.setBounds(190, 11, 40, 20);
+		add(comboDays);
+		
+		String months[] = {"", "1","2","3","4","5","6","7","8","9","10","11","12"};
+		comboMonths = new JComboBox<String>(months);
+		comboMonths.setBounds(240, 11, 40, 20);
+		add(comboMonths);
+		
 		readTrades();
 		
 	}
-
 }
