@@ -218,6 +218,7 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				panelUsers.setVisible(false);
+				IDADD = 2;
 				panelAdd.AddMode(2);
 				panelAdd.setVisible(true);
 			}
@@ -226,6 +227,7 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				panelTrades.setVisible(false);
+				IDADD = 1;
 				panelAdd.AddMode(1);
 				panelAdd.setVisible(true);
 			}
@@ -234,6 +236,7 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				panelItems.setVisible(false);
+				IDADD = 3;
 				panelAdd.AddMode(3);
 				panelAdd.setVisible(true);
 			}
