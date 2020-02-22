@@ -68,6 +68,14 @@ public class Home extends JFrame {
 	private static PanelItems panelItems;
 	private static PanelTrades panelTrades;
 	private ArrayList<btnMenuLeft> btnsMenuLeft;
+	
+	// ICONS
+	
+	public static ImageIcon imgSearch = new ImageIcon(Home.class.getResource("/search.png"));
+	public static ImageIcon imgEdit = new ImageIcon(Home.class.getResource("/edit.png"));
+	public static ImageIcon imgAdd = new ImageIcon(Home.class.getResource("/plus.png"));
+	public static ImageIcon imgRemove = new ImageIcon(Home.class.getResource("/close.png"));
+	public static ImageIcon imgLogo = new ImageIcon(Home.class.getResource("/box64.png"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -110,9 +118,9 @@ public class Home extends JFrame {
 		JHeader.setBounds(230, 0, 770, 125);
 		backMain.add(JHeader);
 		JHeader.setLayout(null);
-		
-		final JLabel lblExit = new JLabel("X");	
-		lblExit.setBounds(750, 0, 17, 14);
+		ImageIcon imgClose = new ImageIcon(Home.class.getResource("/closeW.png"));
+		final JLabel lblExit = new JLabel(imgClose);	
+		lblExit.setBounds(750, 0, 16, 16);
 		lblExit.setForeground(Color.RED);
 		lblExit.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblExit.addMouseListener(new MouseAdapter() {
@@ -144,6 +152,10 @@ public class Home extends JFrame {
 		backMenuLateral.setBounds(0, 0, 230, 600);
 		backMain.add(backMenuLateral);
 		backMenuLateral.setLayout(null);
+		
+		JLabel Logo = new JLabel(imgLogo);
+		Logo.setBounds(85, 35, 64, 64);
+		backMenuLateral.add(Logo);
 		
 		panelUsers = new PanelUsers();
 		backMain.add(panelUsers);
@@ -263,6 +275,9 @@ public class Home extends JFrame {
 		panelTrades.setVisible(false);
 		IDADD = 4;
 		panelAdd.IDEDIT = trd.getId();
+		String d[] = trd.getAmount().split(" ");
+		panelAdd.previousAmount = Integer.parseInt(d[2]);
+		if(d[1].equals("-")) panelAdd.previousAmount *= -1;
 		panelAdd.AddMode(1);
 		panelAdd.setVisible(true);
 	}
@@ -284,6 +299,4 @@ public class Home extends JFrame {
 		panelAdd.AddMode(2);
 		panelAdd.setVisible(true);
 	}
-	
-	
 }

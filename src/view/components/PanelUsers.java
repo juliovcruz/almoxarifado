@@ -71,8 +71,7 @@ public class PanelUsers extends JPanel{
 	
 	private void iconButton16px(){
 		//ImageIcon imgSearch = new ImageIcon("src/imgs/search.png");
-		ImageIcon imgSearch = new ImageIcon(Home.class.getResource("/search.png"));
-		JLabel IconSearch = new JLabel(imgSearch);
+		JLabel IconSearch = new JLabel(Home.imgSearch);
 		IconSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -121,8 +120,7 @@ public class PanelUsers extends JPanel{
 		add(TableFuncs);
 		
 		//ImageIcon imgEdit= new ImageIcon("src/imgs/edit.png");
-		ImageIcon imgEdit = new ImageIcon(Home.class.getResource("/edit.png"));
-		IconEdit= new JLabel(imgEdit);
+		IconEdit= new JLabel(Home.imgEdit);
 		IconEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -142,8 +140,7 @@ public class PanelUsers extends JPanel{
 		add(IconEdit);
 		
 		//ImageIcon imgAdd= new ImageIcon("src/imgs/plus.png");
-		ImageIcon imgAdd = new ImageIcon(Home.class.getResource("/plus.png"));
-		IconAdd= new JLabel(imgAdd);
+		IconAdd= new JLabel(Home.imgAdd);
 		IconAdd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -158,8 +155,7 @@ public class PanelUsers extends JPanel{
 		add(IconAdd);
 		
 		//ImageIcon imgRemove= new ImageIcon("src/imgs/close.png");
-		ImageIcon imgRemove = new ImageIcon(Home.class.getResource("/close.png"));
-		JLabel IconRemove= new JLabel(imgRemove);
+		JLabel IconRemove= new JLabel(Home.imgRemove);
 		IconRemove.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

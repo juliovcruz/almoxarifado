@@ -56,6 +56,7 @@ public class PanelAdd extends JPanel{
 	private JLabel lblRegOrAmount;
 	private JTextField txtName;
 	private JTextField txtRegOrAmount;
+	public int previousAmount;
 	
 	private JList<User> ListUser;
 	private JList<Item> ListItem;
@@ -214,6 +215,7 @@ public class PanelAdd extends JPanel{
 						
 						try {
 						MyUtil.addTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount);
+						MyUtil.editItem(ListItem.getSelectedValue().getName(), ListItem.getSelectedValue().getAmount() + amount, ListItem.getSelectedValue().getId());
 						}	catch (Exception ex) {
 				            throw new RuntimeException("Erro em Adicionar Troca :",ex);
 						}
@@ -284,7 +286,9 @@ public class PanelAdd extends JPanel{
 						else descr = Txtdescr.getText();
 						
 						try {
+						int newAmountItem = amount - previousAmount;
 						MyUtil.editTrade(ListUser.getSelectedValue(), ListItem.getSelectedValue(), descr,day, month, year,amount,IDEDIT);
+						MyUtil.editItem(ListItem.getSelectedValue().getName(), ListItem.getSelectedValue().getAmount() + newAmountItem, ListItem.getSelectedValue().getId());
 						}	catch (Exception ex) {
 				            throw new RuntimeException("Erro em Editar Troca :",ex);
 						}
